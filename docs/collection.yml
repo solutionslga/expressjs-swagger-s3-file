@@ -1,0 +1,1543 @@
+openapi: 3.0.3
+info:
+  title: LBCA
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: "https://dev.api.legalboxplus.digital"
+  - url: "https://staging.api.legalboxplus.digital"
+  
+paths:
+  /dev/files/info:
+    get:
+      tags:
+        - Arquivos
+      summary: pegar aquivos por contextId
+      description: pegar aquivos por contextId
+      operationId: pegarAquivosPorContextId
+      parameters:
+        - name: ids
+          in: query
+          schema:
+            type: string
+            example: "[\"cfeeea009b0f883f5396f574e1fa6361\",\"efeeea009b0f883f5396f574e1fa6361\"]"
+      responses:
+        "200":
+          description: ""
+  /files/info:
+    put:
+      tags:
+        - Arquivos
+      summary: updateFile
+      description: updateFile
+      operationId: updateFile
+      parameters:
+        - name: key
+          in: query
+          schema:
+            type: string
+            example: service-process/1/3dd8d2b0-868e-11eb-9766-8df828d25db7.txt
+        - name: context
+          in: query
+          schema:
+            type: string
+            example: service-process/1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                context:
+                  type: string
+                  example: service-process/1
+                key:
+                  type: string
+                  example: service-process/1/Captura de Tela 2021-03-12 às 14.31.02.png
+                metaData:
+                  type: object
+                  properties:
+                    documentType:
+                      type: string
+                      example: doc
+                    length:
+                      type: string
+                      example: 11kb
+                    name:
+                      type: string
+                      example: Dados do processo1
+                    userid:
+                      type: string
+                      example: uuid
+            example:
+              context: service-process/1
+              key: service-process/1/Captura de Tela 2021-03-12 às 14.31.02.png
+              metaData:
+                documentType: doc
+                length: 11kb
+                name: Dados do processo1
+                userid: uuid
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Arquivos
+      summary: Criar
+      description: Criar
+      operationId: criar
+      parameters:
+        - name: Key
+          in: query
+          schema:
+            type: string
+            example: service-process/1/3dd8d2b0-868e-11eb-9766-8df828d25db7.txt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                context:
+                  type: string
+                  example: service-process/1
+                key:
+                  type: string
+                  example: service-process/1/3dd8d2b0-868e-11eb-9766-8df828d25db7.txt
+                metaData:
+                  type: object
+                  properties:
+                    documentType:
+                      type: string
+                      example: doc
+                    length:
+                      type: string
+                      example: 11kb
+                    name:
+                      type: string
+                      example: Dados do processo
+                    userid:
+                      type: string
+                      example: uuid
+            example:
+              context: service-process/1
+              key: service-process/1/3dd8d2b0-868e-11eb-9766-8df828d25db7.txt
+              metaData:
+                documentType: doc
+                length: 11kb
+                name: Dados do processo
+                userid: uuid
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Arquivos
+      summary: deletar arquivos por IDS
+      description: deletar arquivos por IDS
+      operationId: deletarArquivosPorIds
+      parameters:
+        - name: ids
+          in: query
+          schema:
+            type: string
+            example: "[\"9d9bd400-992f-11eb-9bfd-95e21597b50c\"]"
+      responses:
+        "200":
+          description: ""
+  /files/psurl:
+    get:
+      tags:
+        - Arquivos
+      summary: assinar o arquivo
+      description: assinar o arquivo
+      operationId: assinarOArquivo
+      parameters:
+        - name: key
+          in: query
+          schema:
+            type: string
+            example: 1615484977922.bat
+      responses:
+        "200":
+          description: ""
+  /legalRequest:
+    get:
+      tags:
+        - pedidos
+      summary: Get pedidos  by stepIds
+      description: Get pedidos  by stepIds
+      operationId: getPedidosByStepIds
+      parameters:
+        - name: stepIds
+          in: query
+          schema:
+            type: string
+            example: "[\"4cf1bb6c-a115-11eb-bcbc-0242ac130002\",\"c3e6e148-a115-11eb-bcbc-0242ac130002\"]"
+      responses:
+        "200":
+          description: ""
+  /legalRequest/:
+    put:
+      tags:
+        - pedidos
+      summary: AutoSave pedidos
+      description: AutoSave pedidos
+      operationId: autoSavePedidos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Código:
+                  type: string
+                  example: "3"
+                taskId:
+                  type: string
+                  example: "50"
+                userId:
+                  type: string
+                  example: 5f4bc1c93616e2228faf9608
+            example:
+              Código: "3"
+              taskId: "50"
+              userId: 5f4bc1c93616e2228faf9608
+      responses:
+        "200":
+          description: ""
+  /legalRequest/LegalRequestStep:
+    get:
+      tags:
+        - pedidos
+      summary: get tipo por parent e context
+      description: get tipo por parent e context
+      operationId: getTipoPorParentEContext
+      parameters:
+        - name: processIds
+          in: query
+          schema:
+            type: string
+            example: "[\"1\",\"c3e6e148-a115-11eb-bcbc-0242ac130002\"]"
+      responses:
+        "200":
+          description: ""
+    put:
+      tags:
+        - pedidos
+      summary: AutoSave etapa
+      description: AutoSave etapa
+      operationId: autoSaveEtapa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Código:
+                  type: string
+                  example: "3"
+                taskId:
+                  type: string
+                  example: "50"
+                userId:
+                  type: string
+                  example: 5f4bc1c93616e2228faf9608
+            example:
+              Código: "3"
+              taskId: "50"
+              userId: 5f4bc1c93616e2228faf9608
+      responses:
+        "200":
+          description: ""
+  /legalRequest/type:
+    get:
+      tags:
+        - pedidos
+      summary: breadcrumb por tipo de pedido by id
+      description: breadcrumb por tipo de pedido by id
+      operationId: breadcrumbPorTipoDePedidoById
+      parameters:
+        - name: context
+          in: query
+          schema:
+            type: string
+            example: ecfe7690-90b2-11eb-8379-9b62dbd2ab82
+        - name: parent
+          in: query
+          schema:
+            type: string
+            example: cce5cac0-a205-11eb-90b3-59e1e3f6b857
+      responses:
+        "200":
+          description: ""
+  /legalRequest/type/all:
+    get:
+      tags:
+        - pedidos
+      summary: breadcrumb por tipo de pedido by id
+      description: breadcrumb por tipo de pedido by id
+      operationId: breadcrumbPorTipoDePedidoById1
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 57674020-a206-11eb-b1fe-e986dfabb76c
+        - name: parent
+          in: query
+          schema:
+            type: string
+            example: cce5cac0-a205-11eb-90b3-59e1e3f6b857
+      responses:
+        "200":
+          description: ""
+  /note:
+    get:
+      tags:
+        - Notes
+      summary: get
+      description: get
+      operationId: get
+      parameters:
+        - name: ids
+          in: query
+          schema:
+            type: string
+            example: "[\"6b944930-9612-11eb-8c5c-6ba9736352b8\"]"
+      responses:
+        "200":
+          description: ""
+    put:
+      tags:
+        - Notes
+      summary: create/update
+      description: create/update
+      operationId: create/update
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 9c3a5330-9645-11eb-89c3-75ed516e5a70
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "Caso seu processo esteja em trâmite, em qualquer fase, você ou seu advogado, deverá comunicar sua intenção em um acordo amigável para o juiz da causa Desse modo, é marcada uma audiência e, no dia agendado, as próprias partes, perante o conciliador (que faz o papel de facilitador)"
+                processId:
+                  type: string
+                  example: "4"
+                taskId:
+                  type: string
+                  example: "7"
+                userId:
+                  type: string
+                  example: 5f4bc1c93616e2228faf9608
+            example:
+              content: "Caso seu processo esteja em trâmite, em qualquer fase, você ou seu advogado, deverá comunicar sua intenção em um acordo amigável para o juiz da causa Desse modo, é marcada uma audiência e, no dia agendado, as próprias partes, perante o conciliador (que faz o papel de facilitador)"
+              processId: "4"
+              taskId: "7"
+              userId: 5f4bc1c93616e2228faf9608
+      responses:
+        "200":
+          description: ""
+  /note/getNotesByTaskId:
+    get:
+      tags:
+        - Notes
+      summary: get by process Id
+      description: get by process Id
+      operationId: getByProcessId
+      parameters:
+        - name: processId
+          in: query
+          schema:
+            type: string
+            example: "4"
+        - name: taskId
+          in: query
+          schema:
+            type: string
+            example: "7"
+      responses:
+        "200":
+          description: ""
+  /people:
+    put:
+      tags:
+        - pessoa
+      summary: Criação de pessoa
+      description: Criação de pessoa
+      operationId: criaçãoDePessoa
+      parameters:
+        - name: templateId
+          in: query
+          schema:
+            type: string
+            example: 61a94770-30c0-11eb-986c-b194c5364a25
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthday:
+                  type: string
+                  example: "06041980"
+                city:
+                  type: string
+                  example: campinas
+                cpf:
+                  type: string
+                  example: "22091981869"
+                email:
+                  type: string
+                  example: juares@gmail.com
+                id:
+                  type: string
+                  example: 828186d0-3f37-11eb-bb65-ad0268bc0a6d
+                name:
+                  type: string
+                  example: Ezenilson Moreira Tabasco Pereira PUT
+                number:
+                  type: string
+                  example: ""
+                phone:
+                  type: string
+                  example: "1123411447"
+                rg:
+                  type: string
+                  example: "301823431"
+                state:
+                  type: string
+                  example: MG
+                street:
+                  type: string
+                  example: Rua Abobrinha
+            example:
+              birthday: "06041980"
+              city: campinas
+              cpf: "22091981869"
+              email: juares@gmail.com
+              id: 828186d0-3f37-11eb-bb65-ad0268bc0a6d
+              name: Ezenilson Moreira Tabasco Pereira PUT
+              number: ""
+              phone: "1123411447"
+              rg: "301823431"
+              state: MG
+              street: Rua Abobrinha
+      responses:
+        "200":
+          description: ""
+  /people/config:
+    put:
+      tags:
+        - pessoa
+      summary: People criação do template
+      description: People criação do template
+      operationId: peopleCriaçãoDoTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: a83fe6e0-304c-11eb-abe0-131e7db72bcd
+                subforms:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      disable:
+                        type: boolean
+                        example: false
+                      entityKey:
+                        type: string
+                        example: base
+                      fields:
+                        type: array
+                        items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              disabled:
+                                type: boolean
+                                example: false
+                              entityKey:
+                                type: string
+                                example: name
+                              label:
+                                type: string
+                                example: Nome
+                              required:
+                                type: boolean
+                                example: true
+                              size:
+                                type: number
+                                example: 5
+                              type:
+                                type: string
+                                example: TEXT
+                      label:
+                        type: string
+                        example: Informações Básicas
+                      type:
+                        type: string
+                        example: FORM
+            example:
+              id: a83fe6e0-304c-11eb-abe0-131e7db72bcd
+              subforms:
+                - disable: false
+                  entityKey: base
+                  fields:
+                    - - disabled: false
+                        entityKey: name
+                        label: Nome
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: cpf
+                        helperText: apenas último nome
+                        label: cpf ou cnpj
+                        mask: CPF
+                        required: true
+                        size: 5
+                        type: TEXT
+                    - - disabled: false
+                        entityKey: father
+                        helperText: apenas último nome
+                        label: Nome do pai
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: mother
+                        helperText: apenas último nome
+                        label: Nome do mãe
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: age
+                        helperText: ""
+                        label: Idade
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: peso
+                        helperText: ""
+                        label: Peso
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: descricao
+                        helperText: ""
+                        label: descricao
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: nomesocial
+                        helperText: ""
+                        label: nome social
+                        required: true
+                        size: 5
+                        type: TEXT
+                      - disabled: false
+                        entityKey: timefutebol
+                        helperText: ""
+                        label: Time de futebol
+                        required: true
+                        size: 5
+                        type: TEXT
+                  label: Informações Básicas
+                  type: FORM
+      responses:
+        "200":
+          description: ""
+  /search/query:
+    get:
+      tags:
+        - Busca
+      summary: Busca ElasticSearch - develop
+      description: Busca ElasticSearch - develop
+      operationId: buscaElasticSearchDevelop
+      parameters:
+        - name: idx
+          in: query
+          schema:
+            type: string
+            example: task
+        - name: search
+          in: query
+          schema:
+            type: string
+            example: "***"
+        - name: returnFields
+          in: query
+          schema:
+            type: string
+            example: "[\"*\"]"
+        - name: sourceFields
+          in: query
+          schema:
+            type: string
+            example: "[\"*\"]"
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: "0"
+        - name: size
+          in: query
+          schema:
+            type: string
+            example: "10"
+        - name: extraFieldsKey
+          in: query
+          schema:
+            type: string
+            example: "[\"status\",\"customerLabel\",\"label\"]"
+        - name: extraFieldsValues
+          in: query
+          schema:
+            type: string
+            example: "[\"available\",\"Bridgestone\",\"Tarefa-30011\"]"
+      responses:
+        "200":
+          description: ""
+  /staging/user/login:
+    get:
+      tags:
+        - Login
+      summary: api de Login - stg
+      description: api de Login - stg
+      operationId: apiDeLoginStg
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 234edw32rwe32r3@
+        - name: password
+          in: query
+          schema:
+            type: string
+            example: 10asterix
+        - name: username
+          in: query
+          schema:
+            type: string
+            example: luis.araujo@lbca.com.br
+      responses:
+        "200":
+          description: ""
+  /task:
+    get:
+      tags:
+        - Tarefa
+      summary: Busca de tarefa
+      description: Busca de tarefa
+      operationId: buscaDeTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "2"
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+    put:
+      tags:
+        - Tarefa
+      summary: Alteração de tarefa
+      description: Alteração de tarefa
+      operationId: alteraçãoDeTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "2"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "3"
+                name:
+                  type: string
+                  example: Fórum
+                status:
+                  type: string
+                  example: nova
+            example:
+              id: "3"
+              name: Fórum
+              status: nova
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Tarefa
+      summary: Criação de tarefa
+      description: Criação de tarefa
+      operationId: criaçãoDeTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "222222"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignedToUserId:
+                  type: string
+                  example: 5f4bc1c93616e2228faf9603
+                bpmIdCard:
+                  type: string
+                  example: "32"
+                caseNumber:
+                  type: number
+                  example: 19
+                customerId:
+                  type: string
+                  example: 6009853d1890960001fec5cb
+                customerLabel:
+                  type: string
+                  example: Bridgestone
+                dateDue:
+                  type: string
+                  example: "2021-01-21T10:44:29"
+                dateEnd:
+                  type: string
+                  example: "2021-01-21T10:44:29"
+                dateStart:
+                  type: string
+                  example: "2021-01-21T10:44:29"
+                groupLabel:
+                  type: string
+                  example: Trabalhista
+                id:
+                  type: string
+                  example: "12345"
+                label:
+                  type: string
+                  example: Cadastro Perfil 1
+                priority:
+                  type: number
+                  example: 0
+                stageId:
+                  type: string
+                  example: "100"
+                status:
+                  type: string
+                  example: available
+                workflowId:
+                  type: string
+                  example: 6009853d1890960001fec5cb
+            example:
+              assignedToUserId: 5f4bc1c93616e2228faf9603
+              bpmIdCard: "32"
+              caseNumber: 19
+              customerId: 6009853d1890960001fec5cb
+              customerLabel: Bridgestone
+              dateDue: "2021-01-21T10:44:29"
+              dateEnd: "2021-01-21T10:44:29"
+              dateStart: "2021-01-21T10:44:29"
+              groupLabel: Trabalhista
+              id: "12345"
+              label: Cadastro Perfil 1
+              priority: 0
+              stageId: "100"
+              status: available
+              workflowId: 6009853d1890960001fec5cb
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Tarefa
+      summary: Delete de tarefa
+      description: Delete de tarefa
+      operationId: deleteDeTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "4"
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+  /task/all:
+    get:
+      tags:
+        - Tarefa
+      summary: Busca de tarefa por stageids
+      description: Busca de tarefa por stageids
+      operationId: buscaDeTarefaPorStageids
+      parameters:
+        - name: groupIds
+          in: query
+          schema:
+            type: string
+            example: "[\"9f529330-8d93-11eb-8a9d-c3aaaf1388c5\",\"9f529330-8d93-11eb-8a9d-c3aaaf1388c6\"]"
+        - name: size
+          in: query
+          schema:
+            type: string
+            example: "10"
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: assigned
+        - name: userId
+          in: query
+          schema:
+            type: string
+            example: 5f4bc1c93616e2228faf9608
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+  /task/config:
+    get:
+      tags:
+        - Configuração Tarefa
+      summary: busca das configurações da tarefa
+      description: busca das configurações da tarefa
+      operationId: buscaDasConfiguraçõesDaTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "1"
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+    put:
+      tags:
+        - Configuração Tarefa
+      summary: Atualização das configurações da tarefa
+      description: Atualização das configurações da tarefa
+      operationId: atualizaçãoDasConfiguraçõesDaTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "2"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "1"
+                name:
+                  type: string
+                  example: CPF
+                status:
+                  type: string
+                  example: Criação
+            example:
+              id: "1"
+              name: CPF
+              status: Criação
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Configuração Tarefa
+      summary: Criação das configurações da tarefa
+      description: Criação das configurações da tarefa
+      operationId: criaçãoDasConfiguraçõesDaTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "2"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "1"
+                name:
+                  type: string
+                  example: CPF
+                status:
+                  type: string
+                  example: Criação
+            example:
+              id: "1"
+              name: CPF
+              status: Criação
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Configuração Tarefa
+      summary: delete das configurações da tarefa
+      description: delete das configurações da tarefa
+      operationId: deleteDasConfiguraçõesDaTarefa
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: "1"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: "1"
+                name:
+                  type: string
+                  example: RG
+                status:
+                  type: string
+                  example: Criação
+            example:
+              id: "1"
+              name: RG
+              status: Criação
+      responses:
+        "200":
+          description: ""
+  /task/count:
+    get:
+      tags:
+        - Tarefa
+      summary: "Devolve a quantidade da busca de tarefa por ids "
+      description: "Devolve a quantidade da busca de tarefa por ids "
+      operationId: devolveAQuantidadeDaBuscaDeTarefaPorIds
+      parameters:
+        - name: stageIds
+          in: query
+          schema:
+            type: string
+            example: "[99]"
+        - name: status
+          in: query
+          schema:
+            type: string
+            example: assigned
+        - name: assignedToUserId
+          in: query
+          schema:
+            type: string
+            example: 5f4bc1c93616e2228faf9603
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+  /task/searchableFields:
+    get:
+      tags:
+        - Tarefa
+      summary: Busca de Campo Pesquisaveis
+      description: Busca de Campo Pesquisaveis
+      operationId: buscaDeCampoPesquisaveis
+      responses:
+        "200":
+          description: ""
+  /user/capabilities:
+    put:
+      tags:
+        - capabilities
+      summary: update capability
+      description: update capability
+      operationId: updateCapability
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528110
+                method:
+                  type: string
+                  example: GET
+                path:
+                  type: string
+                  example: /search/query
+                service:
+                  type: string
+                  example: search
+            example:
+              id: 5fd12829b7ef3b0006528110
+              method: GET
+              path: /search/query
+              service: search
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Contexto
+      summary: create contexto
+      description: create contexto
+      operationId: createContexto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528113
+                method:
+                  type: string
+                  example: PUT
+                path:
+                  type: string
+                  example: /people
+                service:
+                  type: string
+                  example: people
+            example:
+              id: 5fd12829b7ef3b0006528113
+              method: PUT
+              path: /people
+              service: people
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - capabilities
+      summary: delete capability
+      description: delete capability
+      operationId: deleteCapability
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528110
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528110
+                method:
+                  type: string
+                  example: GET
+                path:
+                  type: string
+                  example: /search/query
+                service:
+                  type: string
+                  example: search
+            example:
+              id: 5fd12829b7ef3b0006528110
+              method: GET
+              path: /search/query
+              service: search
+      responses:
+        "200":
+          description: ""
+  /user/context:
+    get:
+      tags:
+        - Contexto
+      summary: buscar contexto
+      description: buscar contexto
+      operationId: buscarContexto
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528111
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Contexto
+      summary: deletar  contexto
+      description: deletar  contexto
+      operationId: deletarContexto
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528110
+      responses:
+        "200":
+          description: ""
+  /user/group/getGroupByUserId:
+    get:
+      tags:
+        - grupos
+      summary: busca de grupos
+      description: busca de grupos
+      operationId: buscaDeGrupos
+      parameters:
+        - name: userId
+          in: query
+          schema:
+            type: string
+            example: 5f4bc1c93616e2228faf9608
+      responses:
+        "200":
+          description: ""
+  /user/hascapabilities:
+    get:
+      tags:
+        - capabilities
+      summary: Capabilities Nosql
+      description: Capabilities Nosql
+      operationId: capabilitiesNosql1
+      parameters:
+        - name: userid
+          in: query
+          schema:
+            type: string
+            example: "1"
+        - name: capabilities
+          in: query
+          schema:
+            type: string
+            example: W3sKCQkic2VydmljZSI6ICJzZWFyY2giLAoJCSJwYXRoIjogIi9zZWFyY2gvcXVlcnkiLAoJCSJtZXRob2QiOiAiR0VUIgoJfSwgewoJCSJzZXJ2aWNlIjogInBlb3BsZSIsCgkJInBhdGgiOiAiL3Blb3BsZSIsCgkJIm1ldGhvZCI6ICJQVVQiCgl9LAoJewoJCSJzZXJ2aWNlIjogInBlb3BsZSIsCgkJInBhdGgiOiAiL3Blb3BsZSIsCgkJIm1ldGhvZCI6ICJHRVQiCgl9LAoJewoJCSJzZXJ2aWNlIjogInBlb3BsZSIsCgkJInBhdGgiOiAiL3Blb3BsZSIsCgkJIm1ldGhvZCI6ICJQT1NUIgoJfSwKCXsKCQkic2VydmljZSI6ICJlbGVjdHJvbmljLWNvdXJ0IiwKCQkicGF0aCI6ICIvZWxlY3Ryb25pYy1jb3VydCIsCgkJIm1ldGhvZCI6ICJHRVQiCgl9LAoJewoJCSJzZXJ2aWNlIjogImVsZWN0cm9uaWMtY291cnQiLAoJCSJwYXRoIjogIi9lbGVjdHJvbmljLWNvdXJ0IiwKCQkibWV0aG9kIjogIlBVVCIKCX0sCgl7CgkJInNlcnZpY2UiOiAiZWxlY3Ryb25pYy1jb3VydCIsCgkJInBhdGgiOiAiL2VsZWN0cm9uaWMtY291cnQiLAoJCSJtZXRob2QiOiAiUE9TVCIKCX0sCgl7CgkJInNlcnZpY2UiOiAiZmlsZXMiLAoJCSJwYXRoIjogIi9maWxlcy9wc3VybCIsCgkJIm1ldGhvZCI6ICJHRVQiCgl9LAoJewoJCSJzZXJ2aWNlIjogImZpbGVzIiwKCQkicGF0aCI6ICIvZmlsZXMvaW5mbyIsCgkJIm1ldGhvZCI6ICJHRVQiCgl9CgoKCl0=
+        - name: contextid
+          in: query
+          schema:
+            type: string
+            example: "1"
+      requestBody:
+        content:
+          text/plain:
+            example: ""
+      responses:
+        "200":
+          description: ""
+  /user/hascapabilitiesNosql:
+    get:
+      tags:
+        - capabilities
+      summary: Capabilities Nosql
+      description: Capabilities Nosql
+      operationId: capabilitiesNosql
+      parameters:
+        - name: contextid
+          in: query
+          schema:
+            type: string
+            example: "15654"
+        - name: userid
+          in: query
+          schema:
+            type: string
+            example: "3"
+        - name: capability
+          in: query
+          schema:
+            type: string
+            example: moodlesiteconfig
+      responses:
+        "200":
+          description: ""
+  /user/hascapabilitiesSql:
+    get:
+      tags:
+        - capabilities
+      summary: Capabiltiies Sql
+      description: Capabiltiies Sql
+      operationId: capabiltiiesSql
+      parameters:
+        - name: contextid
+          in: query
+          schema:
+            type: string
+            example: "15654"
+        - name: userid
+          in: query
+          schema:
+            type: string
+            example: "3"
+        - name: capability
+          in: query
+          schema:
+            type: string
+            example: moodlesiteconfig
+      responses:
+        "200":
+          description: ""
+  /user/login:
+    get:
+      tags:
+        - Login
+      summary: api de Login
+      description: api de Login
+      operationId: apiDeLogin
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 234edw32rwe32r3@
+        - name: password
+          in: query
+          schema:
+            type: string
+            example: "123"
+        - name: username
+          in: query
+          schema:
+            type: string
+            example: dev@lbca.com.br
+      responses:
+        "200":
+          description: ""
+  /user/refreshtoken:
+    get:
+      tags:
+        - Login
+      summary: refresh token
+      description: refresh token
+      operationId: refreshToken
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 234edw32rwe32r3@
+        - name: refreshToken
+          in: query
+          schema:
+            type: string
+            example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDYyNTE1NjcsImlzcyI6IkxlZ2FsYm94KyIsImRhdGEiOnsidXVpZCI6IjEifSwiaWF0IjoxNjA2MjQ3OTY3fQ.ii-I2DP7_gxgYLuQ4rfIQv_frLIXGCSAZ2pEE2enYislFpZENSTQmRvPlz7cESVG4Pkxi7J84NaMEkm6VKrqLeR8tmnI0_cIMutgDFwfpMzWewSbURwit7SNlE4PAqbkz_da91A_gXol87ypzLC9NCeFG-zYq45bbizBlV_SuYWLTJb485ngi9DhOqzI9YxeTDtQNw5VBdMYkAlwY56vRc6LVegNcqGo9un2TvVFUcZUxtF0lpoPGuLk6A7hrLgODsNIgg_KlbdzsYu8o1sIYXHobJlIBN8ctsGUGFjyujiCMx4xJjpZjTomqqAE8WgypqosSiZSU_7j_HKXBgZkCQ
+        - name: token
+          in: query
+          schema:
+            type: string
+            example: luis.araujo@lbca.com.br
+      responses:
+        "200":
+          description: ""
+  /user/role:
+    put:
+      tags:
+        - Role(Perfil)
+      summary: update role
+      description: update role
+      operationId: updateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528113
+                name:
+                  type: string
+                  example: Médico
+            example:
+              id: 5fd12829b7ef3b0006528113
+              name: Médico
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Role(Perfil)
+      summary: create role
+      description: create role
+      operationId: createRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528115
+                name:
+                  type: string
+                  example: Assistente
+            example:
+              id: 5fd12829b7ef3b0006528115
+              name: Assistente
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Role(Perfil)
+      summary: deletar  role
+      description: deletar  role
+      operationId: deletarRole
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528115
+      responses:
+        "200":
+          description: ""
+  /user/roleAssignments:
+    get:
+      tags:
+        - Role Assignments
+      summary: buscar roleAssignments
+      description: buscar roleAssignments
+      operationId: buscarRoleAssignments
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528111
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Role Assignments
+      summary: Criação da role_assignments
+      description: Criação da role_assignments
+      operationId: criaçãoDaRoleAssignments
+      parameters:
+        - name: ""
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contextid:
+                  type: string
+                  example: 5fd12829b7ef3b0006528112
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528111
+                roleid:
+                  type: string
+                  example: 5fd12829b7ef3b0006528113
+                userid:
+                  type: string
+                  example: 5fd12829b7ef3b0006528119
+            example:
+              contextid: 5fd12829b7ef3b0006528112
+              id: 5fd12829b7ef3b0006528111
+              roleid: 5fd12829b7ef3b0006528113
+              userid: 5fd12829b7ef3b0006528119
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Role Assignments
+      summary: delete role assignments
+      description: delete role assignments
+      operationId: deleteRoleAssignments
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528112
+      responses:
+        "200":
+          description: ""
+  /user/roleCapabilities:
+    get:
+      tags:
+        - Role Capabilities
+      summary: buscar roleCapabilities
+      description: buscar roleCapabilities
+      operationId: buscarRoleCapabilities
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528119
+      responses:
+        "200":
+          description: ""
+    put:
+      tags:
+        - Role Capabilities
+      summary: update roleCapabilities
+      description: update roleCapabilities
+      operationId: updateRoleCapabilities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capability:
+                  type: string
+                  example: 5fd12829b7ef3b0006528113
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528111
+            example:
+              capability: 5fd12829b7ef3b0006528113
+              id: 5fd12829b7ef3b0006528111
+      responses:
+        "200":
+          description: ""
+    post:
+      tags:
+        - Role Capabilities
+      summary: Criação da role_capabilities
+      description: Criação da role_capabilities
+      operationId: criaçãoDaRoleCapabilities
+      parameters:
+        - name: ""
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capability:
+                  type: string
+                  example: 5fd12829b7ef3b0006528111
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528111
+                permission:
+                  type: string
+                  example: "1"
+                roleid:
+                  type: string
+                  example: 5fd12829b7ef3b0006528113
+            example:
+              capability: 5fd12829b7ef3b0006528111
+              id: 5fd12829b7ef3b0006528111
+              permission: "1"
+              roleid: 5fd12829b7ef3b0006528113
+      responses:
+        "200":
+          description: ""
+    delete:
+      tags:
+        - Role Capabilities
+      summary: delete role capability
+      description: delete role capability
+      operationId: deleteRoleCapability
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+            example: 5fd12829b7ef3b0006528110
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: 5fd12829b7ef3b0006528110
+                method:
+                  type: string
+                  example: GET
+                path:
+                  type: string
+                  example: /search/query
+                service:
+                  type: string
+                  example: search
+            example:
+              id: 5fd12829b7ef3b0006528110
+              method: GET
+              path: /search/query
+              service: search
+      responses:
+        "200":
+          description: ""
+tags:
+  - name: pessoa
+  - name: Busca
+  - name: Login
+  - name: capabilities
+  - name: Arquivos
+  - name: Role Assignments
+  - name: Role Capabilities
+  - name: Contexto
+  - name: Role(Perfil)
+  - name: Tarefa
+  - name: Configuração Tarefa
+  - name: grupos
+  - name: Notes
+  - name: pedidos

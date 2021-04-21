@@ -1,0 +1,19 @@
+{
+  "name": "swagger-cli",
+  "version": "1.0.0",
+  "description": "Reenderiza o arquivo do tipo YAML com referencias externas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Luis Gustavo de Araujo",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.889.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.6",
+    "yamljs": "^0.3.0"
+  }
+}
